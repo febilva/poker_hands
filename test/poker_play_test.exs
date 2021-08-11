@@ -35,4 +35,14 @@ defmodule PokerPlayTest do
              ]
     end
   end
+
+  describe "type/1" do
+    test "will return the type of the hand" do
+      input = "Black: 2H 2D 5S 5C KD"
+
+      hand = PokerPlay.Card.init(input)
+
+      PokerPlay.Hand.type(hand) == "Two Pairs"
+    end
+  end
 end
