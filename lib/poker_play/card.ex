@@ -1,17 +1,17 @@
 defmodule PokerPlay.Card do
-  alias PokerPlay.Card
   defstruct int_value: 0, suit: "", value: ""
+
+  @moduledoc """
+  false
+  """
 
   def init(input_string) do
     input_string
-    |> IO.inspect(lable: "input_string")
     |> format_input
-    |> IO.inspect(lable: "format input")
     |> Enum.map(&card_struct(&1))
   end
 
-  def card_struct(denotation) do
-    IO.inspect(denotation, label: "denotation")
+  defp card_struct(denotation) do
     [value, suit] = split_value_and_suit(denotation)
 
     %__MODULE__{
@@ -21,7 +21,7 @@ defmodule PokerPlay.Card do
     }
   end
 
-  def split_value_and_suit(denotation) do
+  defp split_value_and_suit(denotation) do
     String.split(denotation, "", trim: true)
   end
 
@@ -32,7 +32,7 @@ defmodule PokerPlay.Card do
     |> String.split(" ", trim: true)
   end
 
-  def int_value(value) when value in ["T", "J", "Q", "K", "A"] do
+  defp int_value(value) when value in ["T", "J", "Q", "K", "A"] do
     map = %{
       "T" => 10,
       "J" => 11,
@@ -44,5 +44,9 @@ defmodule PokerPlay.Card do
     map[value]
   end
 
-  def int_value(value), do: String.to_integer(value)
+  defp int_value(value), do: String.to_integer(value)
+
+  # defp test(white: w_string, black: b_string) do
+  #   IO.inspect(w_string)
+  # end
 end
