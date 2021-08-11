@@ -1,6 +1,7 @@
 defmodule PokerPlayTest do
   use ExUnit.Case
-  doctest PokerPlay
+  alias PokerPlay.Comparer
+  # doctest PokerPlay
 
   describe "intialize" do
     test "and format the given input into Card Struct" do
@@ -43,6 +44,20 @@ defmodule PokerPlayTest do
 
       hand_1 = PokerPlay.Card.init(pairs_of_two_and_five)
       hand_2 = PokerPlay.Card.init(pairs_of_two)
+
+      assert PokerPlay.Hand.type(hand_1) == "two pairs"
+      assert PokerPlay.Hand.type(hand_2) == "pair"
+    end
+  end
+
+  describe "best_hand/2" do
+    test "will return the best hand" do
+      pairs_of_two_and_five = "Black: 2H 2D 5S 5C KD"
+      pairs_of_two = "White: 2D 5H 6S 7D 2C"
+
+      assert PokerPlay.best_hand(pairs_of_two_and_five, pairs_of_two) == "Black wins - two pairs"
+    end
+  end
 
   describe "compare/2" do
     test "will compare the hand and return the best hand" do

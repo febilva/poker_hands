@@ -22,10 +22,10 @@ defmodule PokerPlay.Hand do
   defp hand_type(hand) do
     cond do
       hand_type(:two_pairs, hand) ->
-        "Two Pairs"
+        "two pairs"
 
       hand_type(:pair, hand) ->
-        "Pair"
+        "pair"
     end
   end
 
