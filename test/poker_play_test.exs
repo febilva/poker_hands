@@ -38,11 +38,14 @@ defmodule PokerPlayTest do
 
   describe "type/1" do
     test "will return the type of the hand" do
-      input = "Black: 2H 2D 5S 5C KD"
+      pairs_of_two_and_five = "Black: 2H 2D 5S 5C KD"
+      pairs_of_two = "Black: 2D 5H 6S 7D 2C"
 
-      hand = PokerPlay.Card.init(input)
+      hand_1 = PokerPlay.Card.init(pairs_of_two_and_five)
+      hand_2 = PokerPlay.Card.init(pairs_of_two)
 
-      PokerPlay.Hand.type(hand) == "Two Pairs"
+      PokerPlay.Hand.type(hand_1) == "Two Pairs"
+      PokerPlay.Hand.type(hand_2) == "Pair"
     end
   end
 end
