@@ -5,9 +5,9 @@ defmodule PokerPlay.Card do
   false
   """
 
-  def init(input_string) do
-    input_string
-    |> format_input
+  def init(hand) do
+    hand
+    |> format_hand
     |> Enum.map(&card_struct(&1))
   end
 
@@ -25,7 +25,7 @@ defmodule PokerPlay.Card do
     String.split(denotation, "", trim: true)
   end
 
-  defp format_input(hand) do
+  defp format_hand(hand) do
     hand
     |> String.trim("Black:")
     |> String.trim("White:")
@@ -45,8 +45,4 @@ defmodule PokerPlay.Card do
   end
 
   defp int_value(value), do: String.to_integer(value)
-
-  # defp test(white: w_string, black: b_string) do
-  #   IO.inspect(w_string)
-  # end
 end
