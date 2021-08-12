@@ -103,5 +103,33 @@ defmodule PokerPlayTest do
       assert PokerPlay.best_hand(straight_to_8, flush_to_7) ==
                "White wins - flush"
     end
+
+    test "full house beats a flush" do
+      flush_to_8 = "Black: 3H 6H 7H 8H 5H"
+      full = "White: 4S 5H 4C 5D 4H"
+
+      assert PokerPlay.best_hand(flush_to_8, full) ==
+               "White wins - full house"
+    end
+
+    test "both hands have a full house, tie goes to highest-ranked triplet" do
+      full_of_4_by_9 = "Black: 4H 4S 4D 9S 9D"
+      full_of_5_by_8 = "White: 5H 5S 5D 8S 8D"
+
+      assert PokerPlay.best_hand(full_of_4_by_9, full_of_5_by_8) ==
+               "White wins - high card: 5"
+    end
+
+    test "four of a kind beats a full house" do
+      full = "Black: 4S 5H 4D 5D 4H"
+      four_3s = "White: 3S 3H 2S 3D 3C"
+
+      assert PokerPlay.best_hand(full, four_3s) ==
+               "White wins - four of a kind"
+    end
+
+    # test "straight flush beats four of a kind" do
+    #   four_5s = ~w(4S 5H 5S 5D 5C)
+    #   straight_flush_to_10 = ~w(7S 8S 9S 6S 10S)
   end
 end

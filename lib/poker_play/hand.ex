@@ -26,6 +26,12 @@ defmodule PokerPlay.Hand do
 
   defp hand_type(hand: hand, grouped_values: gp_values) do
     cond do
+      hand_type(:four_of_a_kind, gp_values) ->
+        "four of a kind"
+
+      hand_type(:full_house, gp_values) ->
+        "full house"
+
       hand_type(:flush, hand) ->
         "flush"
 
@@ -44,6 +50,15 @@ defmodule PokerPlay.Hand do
       true ->
         "high card"
     end
+  end
+
+  def hand_type(:four_of_a_kind, gp_values) do
+    gp_values
+    |> find_pair_at(0, 4)
+  end
+
+  def hand_type(:full_house, gp_values) do
+    find_pair_at(gp_values, 0, 3) && find_pair_at(gp_values, 1, 2)
   end
 
   def hand_type(:straight, hand) do
