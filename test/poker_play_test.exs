@@ -1,6 +1,5 @@
 defmodule PokerPlayTest do
   use ExUnit.Case
-  alias PokerPlay.Comparer
   # doctest PokerPlay
 
   describe "best_hand/2" do
@@ -55,16 +54,6 @@ defmodule PokerPlayTest do
 
       assert PokerPlay.best_hand(eights_and_twos, fives_and_fours) ==
                "Black wins - high card: 8"
-    end
-  end
-
-  describe "compare/2" do
-    test "will compare the hand and return the best hand" do
-      assert Comparer.compare("straight flush", "four of a kind") == "straight flush"
-      assert Comparer.compare("full house", "flush") == "full house"
-      assert Comparer.compare("straight", "three of a kind") == "straight"
-      assert Comparer.compare("two pairs", "pair") == "two pairs"
-      assert Comparer.compare("pair", "high card") == "pair"
     end
   end
 end
