@@ -41,16 +41,19 @@ defmodule PokerPlay.HandTest do
       pairs_of_two = "Black: 2D 5H 6S 7D 2C"
       flush_to_8 = "Black: 3H 6H 7H 8H 5H"
       high_card = "Black: 2H 4S TS AH 6D"
+      three_fours = "White: 4S 5H 4C 8S 4H"
 
       hand_1 = PokerPlay.Card.init(pairs_of_two_and_five)
       hand_2 = PokerPlay.Card.init(pairs_of_two)
       hand_3 = PokerPlay.Card.init(flush_to_8)
       hand_4 = PokerPlay.Card.init(high_card)
+      hand_5 = PokerPlay.Card.init(three_fours)
 
       assert PokerPlay.Hand.type(hand_1) == "two pairs"
       assert PokerPlay.Hand.type(hand_2) == "pair"
       assert PokerPlay.Hand.type(hand_3) == "flush"
       assert PokerPlay.Hand.type(hand_4) == "high card"
+      assert PokerPlay.Hand.type(hand_5) == "three of a kind"
     end
   end
 end

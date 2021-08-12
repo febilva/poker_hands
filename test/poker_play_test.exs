@@ -55,5 +55,37 @@ defmodule PokerPlayTest do
       assert PokerPlay.best_hand(eights_and_twos, fives_and_fours) ==
                "Black wins - high card: 8"
     end
+
+    test "both hands have two pairs, with the same highest ranked pair, tie goes to low pair" do
+      queens_and_twos = "Black: 2S QS 2C QD JH"
+      queens_and_jacks = "White: JD QH JS 8D QC"
+
+      assert PokerPlay.best_hand(queens_and_twos, queens_and_jacks) ==
+               "White wins - high card: Q"
+    end
+
+    test "both hands are identical" do
+      queens_and_twos = "Black: 2S QS 2C QD JH"
+      queens_and_jacks = "White: 2S QS 2C QD JH"
+
+      assert PokerPlay.best_hand(queens_and_twos, queens_and_jacks) ==
+               "Tie"
+    end
+
+    test "three of a kind beats two pair" do
+      eights_and_twos = "Black: 2S 8H 2H 8D JH"
+      three_fours = "White: 4S 5H 4C 8S 4H"
+
+      assert PokerPlay.best_hand(eights_and_twos, three_fours) ==
+               "White wins - three of a kind"
+    end
+
+    test "both hands have three of a kind, tie goes to highest ranked triplet" do
+      three_twos = "Black: 2S 2H 2C 8D JH"
+      three_aces = "White: 4S AH AS 8C AD"
+
+      assert PokerPlay.best_hand(three_twos, three_aces) ==
+               "White wins - high card: Ace"
+    end
   end
 end

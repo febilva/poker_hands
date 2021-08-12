@@ -27,6 +27,9 @@ defmodule PokerPlay.Hand do
       hand_type(:flush, hand) ->
         "flush"
 
+      hand_type(:three_of_kind, gp_values) ->
+        "three of a kind"
+
       hand_type(:two_pairs, gp_values) ->
         "two pairs"
 
@@ -36,6 +39,11 @@ defmodule PokerPlay.Hand do
       true ->
         "high card"
     end
+  end
+
+  def hand_type(:three_of_kind, gp_values) do
+    gp_values
+    |> find_pair_at(0, 3)
   end
 
   def hand_type(:flush, hand) do
