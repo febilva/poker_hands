@@ -13,9 +13,6 @@ defmodule PokerPlay.Comparer do
 
   def compare(left, right) when left == right, do: {:tie, left}
 
-  # def compare(left, right) do
-  #   if hand_rank(left) < hand_rank(right), do: :left, else: :right
-  # end
   def compare(left, right) do
     if hand_rank(left) < hand_rank(right), do: left, else: right
   end

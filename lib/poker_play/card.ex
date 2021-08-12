@@ -1,10 +1,6 @@
 defmodule PokerPlay.Card do
   defstruct int_value: 0, suit: "", value: ""
-
-  @moduledoc """
-  false
-  """
-
+  @moduledoc false
   def init(hand) do
     hand
     |> format_hand
