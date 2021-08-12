@@ -61,7 +61,14 @@ defmodule PokerPlayTest do
       assert PokerPlay.best_hand(pairs_of_two_and_five, pairs_of_two) == "Black wins - two pairs"
     end
 
-    test "flush beats a straight" do
+    test "two pairs beats one pair" do
+      pair_of_two = "Black: 2S 8H 6S 8D JH"
+      five_and_fours = "White: 4S 5H 4C 8C 5C"
+
+      assert PokerPlay.best_hand(pair_of_two, five_and_fours) == "White wins - two pairs"
+    end
+
+    test "flush beats a two pairs" do
       flush_to_8 = "Black: 3H 6H 7H 8H 5H"
       pairs_of_two = "White: 2D 5H 6S 7D 2C"
 
