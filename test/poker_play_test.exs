@@ -128,8 +128,12 @@ defmodule PokerPlayTest do
                "White wins - four of a kind"
     end
 
-    # test "straight flush beats four of a kind" do
-    #   four_5s = ~w(4S 5H 5S 5D 5C)
-    #   straight_flush_to_10 = ~w(7S 8S 9S 6S 10S)
+    test "straight flush beats four of a kind" do
+      four_5s = "Black: 4S 5H 5S 5D 5C"
+      straight_flush_to_10 = "White: 7S 8S 9S 6S TS"
+
+      assert PokerPlay.best_hand(four_5s, straight_flush_to_10) ==
+               "White wins - straight flush"
+    end
   end
 end

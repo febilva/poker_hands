@@ -26,6 +26,9 @@ defmodule PokerPlay.Hand do
 
   defp hand_type(hand: hand, grouped_values: gp_values) do
     cond do
+      hand_type(:straight_flush, hand) ->
+        "straight flush"
+
       hand_type(:four_of_a_kind, gp_values) ->
         "four of a kind"
 
@@ -50,6 +53,10 @@ defmodule PokerPlay.Hand do
       true ->
         "high card"
     end
+  end
+
+  def hand_type(:straight_flush, hand) do
+    hand_type(:straight, hand) && hand_type(:flush, hand)
   end
 
   def hand_type(:four_of_a_kind, gp_values) do
