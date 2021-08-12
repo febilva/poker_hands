@@ -1,13 +1,16 @@
 defmodule PokerPlay.Hand do
+  defstruct cards: [], grouped_values: []
   @moduledoc false
 
   @doc """
   this function will return the type of the hand
   """
   def type(hand) do
-    hand
-    |> format
-    |> hand_type()
+    grouped_values =
+      hand
+      |> format
+
+    hand_type(hand: hand, grouped_values: grouped_values)
   end
 
   def format(hand) do
@@ -19,22 +22,33 @@ defmodule PokerPlay.Hand do
     |> Enum.map(fn {_int_value, items} -> Enum.map(items, & &1.value) end)
   end
 
-  defp hand_type(hand) do
+  defp hand_type(hand: hand, grouped_values: gp_values) do
     cond do
-      hand_type(:two_pairs, hand) ->
+      hand_type(:flush, hand) ->
+        "flush"
+
+      hand_type(:two_pairs, gp_values) ->
         "two pairs"
 
-      hand_type(:pair, hand) ->
+      hand_type(:pair, gp_values) ->
         "pair"
     end
   end
 
-  def hand_type(:two_pairs, hand) do
-    find_pair_at(hand, 0, 2) && find_pair_at(hand, 1, 2)
+  def hand_type(:flush, hand) do
+    hand
+    |> Enum.map(& &1.suit)
+    |> Enum.uniq()
+    |> Kernel.length()
+    |> Kernel.==(1)
   end
 
-  def hand_type(:pair, hand) do
-    hand
+  def hand_type(:two_pairs, gp_values) do
+    find_pair_at(gp_values, 0, 2) && find_pair_at(gp_values, 1, 2)
+  end
+
+  def hand_type(:pair, gp_values) do
+    gp_values
     |> Enum.at(0)
     |> Kernel.length()
     |> Kernel.==(2)

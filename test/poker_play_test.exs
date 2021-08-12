@@ -41,12 +41,15 @@ defmodule PokerPlayTest do
     test "will return the type of the hand" do
       pairs_of_two_and_five = "Black: 2H 2D 5S 5C KD"
       pairs_of_two = "Black: 2D 5H 6S 7D 2C"
+      flush_to_8 = "Black: 3H 6H 7H 8H 5H"
 
       hand_1 = PokerPlay.Card.init(pairs_of_two_and_five)
       hand_2 = PokerPlay.Card.init(pairs_of_two)
+      hand_3 = PokerPlay.Card.init(flush_to_8)
 
       assert PokerPlay.Hand.type(hand_1) == "two pairs"
       assert PokerPlay.Hand.type(hand_2) == "pair"
+      assert PokerPlay.Hand.type(hand_3) == "flush"
     end
   end
 
@@ -56,6 +59,13 @@ defmodule PokerPlayTest do
       pairs_of_two = "White: 2D 5H 6S 7D 2C"
 
       assert PokerPlay.best_hand(pairs_of_two_and_five, pairs_of_two) == "Black wins - two pairs"
+    end
+
+    test "flush beats a straight" do
+      flush_to_8 = "Black: 3H 6H 7H 8H 5H"
+      pairs_of_two = "White: 2D 5H 6S 7D 2C"
+
+      assert PokerPlay.best_hand(flush_to_8, pairs_of_two) == "Black wins - flush"
     end
   end
 
