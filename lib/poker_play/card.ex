@@ -28,7 +28,7 @@ defmodule PokerPlay.Card do
     |> String.split(" ", trim: true)
   end
 
-  defp int_value(value) when value in ["T", "J", "Q", "K", "A"] do
+  def int_value(value) when value in ["T", "J", "Q", "K", "A"] do
     map = %{
       "T" => 10,
       "J" => 11,
@@ -40,5 +40,5 @@ defmodule PokerPlay.Card do
     map[value]
   end
 
-  defp int_value(value), do: String.to_integer(value)
+  def int_value(value), do: String.to_integer(value)
 end
