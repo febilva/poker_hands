@@ -87,5 +87,13 @@ defmodule PokerPlayTest do
       assert PokerPlay.best_hand(three_twos, three_aces) ==
                "White wins - high card: Ace"
     end
+
+    test "a straight beats three of a kind" do
+      three_fours = "Black: 4S 5H 4C 8D 4H"
+      straight = "White: 3S 4D 2S 6D 5C"
+
+      assert PokerPlay.best_hand(three_fours, straight) ==
+               "White wins - straight"
+    end
   end
 end
