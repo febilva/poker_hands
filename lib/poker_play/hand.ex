@@ -5,7 +5,7 @@ defmodule PokerPlay.Hand do
   @moduledoc false
 
   @doc """
-  this function will return the type of the hand
+  this function will return the type of the hand based on the highest rank
   """
   def type(hand) do
     grouped_values =
@@ -85,7 +85,6 @@ defmodule PokerPlay.Hand do
   end
 
   def check(cards) do
-    IO.inspect(cards, label: "cards")
     ace_high?(cards) || ace_low?(cards)
   end
 
@@ -101,9 +100,7 @@ defmodule PokerPlay.Hand do
 
   defp matches?(hand_values, all_values) do
     all_values
-    |> IO.inspect(label: "hand values")
     |> :binary.match(hand_values)
-    |> IO.inspect(label: "macthed string")
     |> Kernel.!=(:nomatch)
   end
 
@@ -111,7 +108,6 @@ defmodule PokerPlay.Hand do
     cards
     |> Enum.map(fn x -> x.value end)
     |> Enum.join()
-    |> IO.inspect(label: "joining")
   end
 
   def rotated_hand_values(cards) do

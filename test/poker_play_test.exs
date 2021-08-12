@@ -95,5 +95,13 @@ defmodule PokerPlayTest do
       assert PokerPlay.best_hand(three_fours, straight) ==
                "White wins - straight"
     end
+
+    test "flush beats a straight" do
+      straight_to_8 = "Black: 4C 6H 7D 8D 5H"
+      flush_to_7 = "White: 2S 4S 5S 6S 7S"
+
+      assert PokerPlay.best_hand(straight_to_8, flush_to_7) ==
+               "White wins - flush"
+    end
   end
 end

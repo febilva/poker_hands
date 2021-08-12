@@ -24,8 +24,7 @@ defmodule PokerPlay do
         "White wins - #{right_hand_type}"
 
       {:tie, _type} ->
-        high_rank_check(lef_hand, right_hand)
-        |> case do
+        case high_rank_check(lef_hand, right_hand) do
           {:left, higher_rank_card_value} ->
             higher_card = char_value(higher_rank_card_value)
 
@@ -62,9 +61,6 @@ defmodule PokerPlay do
   end
 
   def high_card_values(hand) do
-    # require IEx
-    # IEx.pry()
-
     hand
     |> Enum.concat()
     |> Enum.map(&Card.int_value(&1))
