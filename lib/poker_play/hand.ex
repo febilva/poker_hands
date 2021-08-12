@@ -32,6 +32,9 @@ defmodule PokerPlay.Hand do
 
       hand_type(:pair, gp_values) ->
         "pair"
+
+      true ->
+        "high card"
     end
   end
 
